@@ -114,11 +114,11 @@ export class Settings {
     game.settings.register("image-hover", "userImageSize", {
       name: "Image to monitor width", // Setting name
       hint: "Changes the size of the image (per user), smaller value implies larger image (1/value of your screen width).", // Setting description
-      scope: "client", // Client-stored setting
+      scope: "world",
       config: true, // Show setting in configuration view
       range: {
         // Choices
-        min: 3,
+        min: 1,
         max: 20,
         step: 0.5,
       },
@@ -135,7 +135,7 @@ export class Settings {
       range: {
         // Choices
         min: 0,
-        max: 5000,
+        max: 10000,
         step: 100,
       },
       default: 0, // Default Value
