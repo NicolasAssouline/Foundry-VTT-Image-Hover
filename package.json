@@ -1,0 +1,8 @@
+{
+  "name": "image-hover",
+  "version": "3.0.4",
+  "author": "Eriku",
+  "scripts": {
+    "package": "zip -r ./module.zip module.json image-hover.js settings.js templates/ README.md"
+  }
+}
