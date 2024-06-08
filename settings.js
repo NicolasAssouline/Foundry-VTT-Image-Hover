@@ -70,11 +70,12 @@ export class Settings {
     // client setting
     game.settings.register("image-hover", "userEnableModule", {
       name: "Enable/Disable Image Hover", // Setting name
-      hint: "Uncheck to disable Image Hover (per user).", // Setting description
-      scope: "client", // client-stored setting
+      hint: "Uncheck to disable Image Hover.", // Setting description
+      scope: "world", // client-stored setting
       config: true, // Show setting in configuration view
       type: Boolean, // Value type
       default: true, // The default value for the setting
+      requiresReload: true,
       onChange: (value) => {
         canvas.hud.imageHover.clear();
       },
@@ -106,14 +107,14 @@ export class Settings {
         "Top right": "Top right",
         Centre: "Centre",
       },
-      default: "Bottom left", // Default Value
+      default: "Centre", // Default Value
       type: String, // Value type
     });
 
     // client setting
     game.settings.register("image-hover", "userImageSize", {
       name: "Image to monitor width", // Setting name
-      hint: "Changes the size of the image (per user), smaller value implies larger image (1/value of your screen width).", // Setting description
+      hint: "Changes the size of the image, smaller value implies larger image (1/value of your screen width).", // Setting description
       scope: "world",
       config: true, // Show setting in configuration view
       range: {
