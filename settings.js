@@ -123,7 +123,7 @@ export class Settings {
         max: 20,
         step: 0.5,
       },
-      default: 7, // Default Value
+      default: 2, // Default Value
       type: Number, // Value type
     });
 
@@ -136,10 +136,10 @@ export class Settings {
       range: {
         // Choices
         min: 0,
-        max: 10000,
+        max: 15000,
         step: 100,
       },
-      default: 0, // Default Value
+      default: 7000, // Default Value
       type: Number, // Value type
     });
   }
