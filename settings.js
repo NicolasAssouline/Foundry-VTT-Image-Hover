@@ -120,7 +120,7 @@ export class Settings {
         "Top right": "Top right",
         Centre: "Centre",
       },
-      default: "Bottom left", // Default Value
+      default: "Centre", // Default Value
       type: String, // Value type
     });
 
