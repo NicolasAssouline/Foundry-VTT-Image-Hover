@@ -7,6 +7,7 @@ let actorRequirementSetting = "None"; // required actor permission to see charac
 let imageHoverActive = true; // Enable/Disable module
 let imagePositionSetting = "Bottom left"; // location of character art
 let imageSizeSetting = 7; // size of character art
+let GMImageSizeSetting = 7; // size of character art
 let imageHoverArt = "character"; // Art type on hover (Character art or Token art)
 let imageHoverDelay = 0; // Hover time requirement (milliseconds)
 let DEFAULT_TOKEN = "icons/svg/mystery-man.svg"; // default token for foundry vtt
@@ -34,6 +35,7 @@ function registerModuleSettings() {
   );
   imageHoverActive = game.settings.get("image-hover", "userEnableModule");
   imageSizeSetting = game.settings.get("image-hover", "userImageSize");
+  GMImageSizeSetting = game.settings.get("image-hover", "GMUserImageSize"); // size of character art
   imagePositionSetting = game.settings.get("image-hover", "userImagePosition");
   imageHoverArt = game.settings.get("image-hover", "artType");
   imageHoverDelay = game.settings.get("image-hover", "userHoverDelay");
@@ -247,8 +249,9 @@ class ImageHoverHUD extends BasePlaceableHUD {
    */
   changePosition(imageWidth, imageHeight) {
     const centre = canvas.scene._viewPosition; // Middle of the screen
-    let imageWidthScaled =
-      window.innerWidth / (imageSizeSetting * centre.scale); // Scaled width of image to canvas
+    const scalingFactor = game.user.isGM ? GMImageSizeSetting : imageSizeSetting;
+
+    let imageWidthScaled = window.innerWidth / (scalingFactor * centre.scale); // Scaled width of image to canvas
     let imageHeightScaled = imageWidthScaled * (imageHeight / imageWidth); // Scaled height from width
     const windowWidthScaled = window.innerWidth / centre.scale;
     const windowHeightScaled = window.innerHeight / centre.scale;

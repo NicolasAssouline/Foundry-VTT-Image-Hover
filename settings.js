@@ -114,7 +114,7 @@ export class Settings {
     // client setting
     game.settings.register("image-hover", "userImageSize", {
       name: "Image to monitor width", // Setting name
-      hint: "Changes the size of the image, smaller value implies larger image (1/value of your screen width).", // Setting description
+      hint: "Changes the size of the image for players, smaller value implies larger image (1/value of your screen width).", // Setting description
       scope: "world",
       config: true, // Show setting in configuration view
       range: {
@@ -123,7 +123,22 @@ export class Settings {
         max: 20,
         step: 0.5,
       },
-      default: 2, // Default Value
+      default: 1.5, // Default Value
+      type: Number, // Value type
+    });
+
+    game.settings.register("image-hover", "GMUserImageSize", {
+      name: "Image to monitor width", // Setting name
+      hint: "Changes the size of the image for the DM, smaller value implies larger image (1/value of your screen width).", // Setting description
+      scope: "world",
+      config: true, // Show setting in configuration view
+      range: {
+        // Choices
+        min: 1,
+        max: 20,
+        step: 0.5,
+      },
+      default: 7, // Default Value
       type: Number, // Value type
     });
 
