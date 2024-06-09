@@ -69,12 +69,25 @@ export class Settings {
 
     // client setting
     game.settings.register("image-hover", "userEnableModule", {
-      name: "Enable/Disable Image Hover", // Setting name
+      name: "Enable/Disable Image Hover module", // Setting name
       hint: "Uncheck to disable Image Hover.", // Setting description
       scope: "world", // client-stored setting
       config: true, // Show setting in configuration view
       type: Boolean, // Value type
       default: true, // The default value for the setting
+      requiresReload: true,
+      onChange: (value) => {
+        canvas.hud.imageHover.clear();
+      },
+    });
+
+    game.settings.register("image-hover", "enableHover", {
+      name: "Enable/Disable Image Hover", // Setting name
+      hint: "Uncheck to no longer show players art previews (GM can still trigger them).", // Setting description
+      scope: "world", // client-stored setting
+      config: true, // Show setting in configuration view
+      type: Boolean, // Value type
+      default: false, // The default value for the setting
       requiresReload: true,
       onChange: (value) => {
         canvas.hud.imageHover.clear();
@@ -107,7 +120,7 @@ export class Settings {
         "Top right": "Top right",
         Centre: "Centre",
       },
-      default: "Centre", // Default Value
+      default: "Bottom left", // Default Value
       type: String, // Value type
     });
 

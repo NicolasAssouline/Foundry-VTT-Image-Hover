@@ -4,10 +4,11 @@ import { Settings } from "./settings.js";
  * Default settings
  */
 let actorRequirementSetting = "None"; // required actor permission to see character art
-let imageHoverActive = true; // Enable/Disable module
+let moduleEnabled = true; // Enable/Disable module
+let onHoverEnabled = true; // Enable/Disable module
 let imagePositionSetting = "Bottom left"; // location of character art
 let imageSizeSetting = 7; // size of character art
-let GMImageSizeSetting = 7; // size of character art
+let GMImageSizeSetting = 7; // size of character art for the GM
 let imageHoverArt = "character"; // Art type on hover (Character art or Token art)
 let imageHoverDelay = 0; // Hover time requirement (milliseconds)
 let DEFAULT_TOKEN = "icons/svg/mystery-man.svg"; // default token for foundry vtt
@@ -33,7 +34,8 @@ function registerModuleSettings() {
     "image-hover",
     "permissionOnHover"
   );
-  imageHoverActive = game.settings.get("image-hover", "userEnableModule");
+  moduleEnabled = game.settings.get("image-hover", "userEnableModule");
+  onHoverEnabled = game.settings.get("image-hover", "enableHover");
   imageSizeSetting = game.settings.get("image-hover", "userImageSize");
   GMImageSizeSetting = game.settings.get("image-hover", "GMUserImageSize"); // size of character art
   imagePositionSetting = game.settings.get("image-hover", "userImagePosition");
@@ -331,7 +333,7 @@ class ImageHoverHUD extends BasePlaceableHUD {
     if (
       !token ||
       !token.actor ||
-      imageHoverActive === false ||
+      moduleEnabled === false ||
       (token.actor.permission < actorRequirementSetting &&
         token.actor.ownership["default"] !== -1)
     ) {
@@ -407,7 +409,7 @@ class ImageHoverHUD extends BasePlaceableHUD {
    * @param {*} token token passed in
    */
   showToAll(token) {
-    if (token && imageHoverActive) {
+    if (token && moduleEnabled) {
       showSpecificArt = true; // condition to keep art on screen
       canvas.hud.imageHover.bind(token);
       clearTimeout(timer); //reset timer if key is pressed again
@@ -472,6 +474,8 @@ Hooks.on("hoverToken", (token, hovered) => {
     canvas.hud.imageHover.clear();
     return;
   }
+
+  if (!onHoverEnabled) return;
 
   /**
    * Check no keybind requirement set.
